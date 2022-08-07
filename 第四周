@@ -1,0 +1,19 @@
+# 任务一：查找employees里最晚入职员工的所有信息
+select * from employees order by hire_date desc limit 1
+
+# 任务二：使用join查询方式找出没有分类的电影id以及其电影名称。
+SELECT f.film_id,title FROM film f
+LEFT JOIN film_category fc ON f.film_id = fc.film_id 
+WHERE last_update IS NULL
+	
+# 任务三：分页查询employees表，每5行一页，返回第2页的数据
+SELECT * FROM employees limit 5,5;
+
+# 任务四：对first_name创建唯一索引uniq_idx_firstname，对last_name创建普通索引idx_lastname
+CREATE UNIQUE INDEX uniq_idx_firstname ON actor(first_name);
+CREATE INDEX idx_lastname ON actor(last_name);
+
+# 任务五：输出通过的题目的排名，通过题目个数相同的，排名相同，此时按照id升序排列。
+select id, number, dense_rank() over (order by number desc) as t_rank
+from passing_number
+order by number desc, id;
